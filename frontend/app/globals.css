@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #22A3CF;
+}
+
+body {
+  color: #222;
+  background: #fff;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors font-medium;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700 transition-colors;
+  }
+} 
