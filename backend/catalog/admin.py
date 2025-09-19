@@ -4,8 +4,9 @@ from .models import Product, Order
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'slug', 'price', 'is_active', 'created_at']
-    list_filter = ['is_active', 'created_at']
+    list_display = ['title', 'slug', 'price',
+                    'section', 'is_active', 'created_at']
+    list_filter = ['section', 'is_active', 'created_at']
     search_fields = ['title', 'slug']
     prepopulated_fields = {'slug': ('title',)}
     readonly_fields = ['created_at', 'updated_at']

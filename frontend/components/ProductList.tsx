@@ -10,6 +10,7 @@ interface Product {
   description: string
   price: number
   image: string
+  section: 'caravan' | 'svetobaza' | 'locations'
 }
 
 export default function ProductList() {
@@ -17,16 +18,18 @@ export default function ProductList() {
   const [loading, setLoading] = useState(true)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [section, setSection] = useState<'caravan' | 'svetobaza' | 'locations'>('caravan')
 
   useEffect(() => {
-    fetch('/api/products/')
+    const url = `/api/products/?section=${section}`
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         setProducts(data.results || [])
         setLoading(false)
       })
       .catch(() => setLoading(false))
-  }, [])
+  }, [section])
 
   const handleRent = (product: Product) => {
     setSelectedProduct(product)
@@ -44,6 +47,26 @@ export default function ProductList() {
 
   return (
     <>
+      <div className="flex justify-center gap-3 mb-10">
+        <button
+          onClick={() => setSection('caravan')}
+          className={`px-6 py-2 rounded-full border ${section === 'caravan' ? 'bg-brand text-white border-brand' : 'bg-white text-gray-700 border-gray-300'}`}
+        >
+          Караван
+        </button>
+        <button
+          onClick={() => setSection('svetobaza')}
+          className={`px-6 py-2 rounded-full border ${section === 'svetobaza' ? 'bg-brand text-white border-brand' : 'bg-white text-gray-700 border-gray-300'}`}
+        >
+          Светобаза
+        </button>
+        <button
+          onClick={() => setSection('locations')}
+          className={`px-6 py-2 rounded-full border ${section === 'locations' ? 'bg-brand text-white border-brand' : 'bg-white text-gray-700 border-gray-300'}`}
+        >
+          Локации
+        </button>
+      </div>
       <div className="space-y-16">
         {products.map((product, index) => (
           <div

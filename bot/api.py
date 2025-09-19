@@ -25,6 +25,7 @@ class OrderNotification(BaseModel):
     customer_phone: str
     comment: str
     created_at: str
+    section: str | None = None
 
 
 @app.get('/ping')
@@ -58,6 +59,7 @@ async def notify_new_order(
     # Формируем сообщение для бота
     message_text = f'''🆕 Новый заказ #{order.order_id}
 Товар: {order.product}
+Раздел: {order.section or 'не указан'}
 Цена: {order.price // 100} ₽
 Имя: {order.customer_name}
 Телефон: {order.customer_phone}'''

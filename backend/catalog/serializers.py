@@ -5,13 +5,14 @@ from .models import Product, Order
 class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'slug', 'title', 'price', 'image']
+        fields = ['id', 'slug', 'title', 'price', 'image', 'section']
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'slug', 'title', 'description', 'price', 'image']
+        fields = ['id', 'slug', 'title',
+                  'description', 'price', 'image', 'section']
 
 
 class OrderCreateSerializer(serializers.ModelSerializer):

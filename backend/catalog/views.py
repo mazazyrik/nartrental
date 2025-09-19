@@ -23,6 +23,13 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
             return ProductDetailSerializer
         return ProductListSerializer
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        section = self.request.query_params.get('section')
+        if section:
+            qs = qs.filter(section=section)
+        return qs
+
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
@@ -46,6 +53,7 @@ class OrderViewSet(viewsets.ModelViewSet):
             payload = {
                 'order_id': order.id,
                 'product': order.product.title,
+                'section': order.product.section,
                 'price': order.price_locked,
                 'customer_name': order.customer_name,
                 'customer_phone': order.customer_phone,

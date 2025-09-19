@@ -2,11 +2,18 @@ from django.db import models
 
 
 class Product(models.Model):
+    class Section(models.TextChoices):
+        CARAVAN = 'caravan', 'Караван'
+        SVETOBAZA = 'svetobaza', 'Светобаза'
+        LOCATIONS = 'locations', 'Локации'
+
     slug = models.SlugField(unique=True)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     price = models.PositiveIntegerField(help_text='в копейках')
     image = models.ImageField(upload_to='products/')
+    section = models.CharField(
+        max_length=20, choices=Section.choices, default=Section.CARAVAN)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

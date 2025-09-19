@@ -7,6 +7,7 @@ interface Product {
   id: number
   title: string
   image: string
+  section?: 'caravan' | 'svetobaza' | 'locations'
 }
 
 export default function ProductsSlider() {
