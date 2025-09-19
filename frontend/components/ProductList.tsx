@@ -78,7 +78,7 @@ export default function ProductList() {
             <div className="w-full lg:w-1/2">
               <div className="relative h-80 lg:h-96 rounded-xl overflow-hidden shadow-lg">
                 <Image
-                  src={`/media${product.image}`}
+                  src={product.image.startsWith('http') ? product.image : (product.image.startsWith('/') ? product.image : `/media/${product.image}`)}
                   alt={product.title}
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-300"

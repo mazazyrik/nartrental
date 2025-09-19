@@ -77,7 +77,7 @@ export default function ProductsSlider() {
             <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <div className="relative h-56">
                 <Image
-                  src={`/media${product.image}`}
+                  src={(product.image as any).startsWith('http') ? (product.image as any) : ((product.image as any).startsWith('/') ? (product.image as any) : `/media/${product.image}`)}
                   alt={product.title}
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-300"
